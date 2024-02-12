@@ -2,12 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
-
-body {
-    font-family: 'Arial', sans-serif;
-}
-
 header {
     background-color: rgb(80, 38, 101);
     display: flex;
@@ -16,22 +12,18 @@ header {
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 header h1 {
     font-size: 24px;
     color: rgb(245, 253, 255);
     position: absolute;
     left: 100px;
 }
-
 header img {
     height: 40px;
 }
-
 main {
     display: flex;
 }
-
 #aside {
     background-color: rgb(245, 253, 255);
     height: 100vh;
@@ -42,27 +34,337 @@ main {
     justify-content: center;
     box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
 }
-
 .asideButton {
     width: 70%;
     padding: 12px;
     margin-bottom: 10px;
-    background-color: #ff5c5c;
+    background-color: rgb(80, 38, 101);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 .asideButton:hover {
-    background-color: #e83a3a;
+    background-color: rgb(120, 78, 161);
 }
 
-#mainMyDay {
-    background-color: rgb(237, 207, 108);
+
+/* Calendar */
+#mainCalendar {
+    display: none;
+    background-color: rgb(245, 253, 255);
     height: 100vh;
     width: 75%;
     padding: 20px;
     box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
 }
+.left {
+    width: 60%;
+    padding: 20px;
+}
+.calendar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #555;
+    border-radius: 5px;
+    background-color: #f7f7f7; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+.calendar::before,
+.calendar::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 12px;
+    height: 97%;
+    border-radius: 0 5px 5px 0;
+    background-color: #d3d5d6d7;
+    transform: translateY(-50%);
+}
+.calendar::before {
+    height: 94%;
+    left: calc(100% + 12px);
+    background-color: #a0a0a0;
+}
+.calendar .month {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+.calendar .month .prev,
+.calendar .month .next {
+    cursor: pointer;
+}
+.calendar .month .prev:hover,
+.calendar .month .next:hover {
+    color: var(--primary-clr);
+}
+.calendar .weekdays {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+.calendar .weekdays div {
+    width: 14.28%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.calendar .days {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.calendar .days .day {
+    width: 14.28%;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #555;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+.calendar .day:not(.prev-date, .next-date):hover {
+    color: white;
+    background-color:  rgb(80, 38, 101);
+}
+.calendar .days .prev-date,
+.calendar .days .next-date {
+    color: #b3b3b3;
+}
+.calendar .days .active {
+    position: relative;
+    font-size: 2rem;
+    color: white;
+    background-color:  rgb(80, 38, 101);
+}
+.calendar .days .active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 10px 2px  rgb(80, 38, 101);
+}
+.calendar .days .today {
+    font-size: 2rem;
+    color:  rgb(80, 38, 101);
+}
+.calendar .days .event {
+    position: relative;
+    padding-bottom: 10px;
+}
+.calendar .days .event::after {
+    content: '';
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    width: 75%;
+    height: 6px;
+    border-radius: 30px;
+    transform: translateX(-50%);
+    background-color:  rgb(80, 38, 101);
+}
+.calendar .day:hover::after,
+.calendar .active .event::after {
+    background-color: white;
+}
+
+
+/* Notes */
+#mainNotes {
+    display: none;
+}
+.containerNotes {
+    width: 100%;
+    min-height: 100vh;
+    color: rgb(80, 38, 101);
+    padding-top: 15%;
+    padding-left: 20%;
+}
+.containerNotes button{
+    display: flex;
+    align-items: center;
+    background: rgb(80, 38, 101);
+    color: white;
+    font-size: 16px;
+    outline: none;
+    border: 0;
+    border-radius: 20px;
+    padding: 15px 100px;
+    margin: 30px 0 20px;
+    cursor: pointer;
+}
+.containerNotes button:hover {
+    background-color: rgb(120, 78, 161);
+}
+.input-box {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    min-height: 150px;
+    background: rgb(243, 235, 250);
+    color: #555;
+    padding: 20px;
+    margin: 20px 0;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.input-box img {
+    width: 20px;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    cursor: pointer;
+}
+.input-box img:hover {
+    filter: brightness(1.2);
+}
+
+
+/* My day*/
+#mainMyDay {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
+.container {
+    padding: 20px;
+    background-color: none;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+}
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.wrapper input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid rgb(80, 38, 101);
+    border-radius: 3px;
+    outline: none;
+}
+.wrapper input:focus {
+    border-color: #5e4d4d;
+}
+.wrapper button {
+    padding: 8px 16px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 16px;
+    background-color: rgb(80, 38, 101);
+    border: none;
+    color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.wrapper button:hover {
+    background-color: #725b5b;
+}
+#tasks {
+    margin-top: 1em;
+    border-radius: 0.5em;
+    width: 100%;
+    position: relative;
+    padding: 1em 0.5em;
+}
+.task {
+    background-color: white;
+    padding: 0.8em 1em;
+    display: grid;
+    grid-template-columns: 1fr 8fr 2fr 2fr;
+    gap: 1em;
+    border-radius: 0.5em;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.05);
+    align-items: center;
+    cursor: pointer;
+}
+.task:not(:first-child) {
+    margin-top: 1em;
+}
+.task input[type="checkbox"] {
+    position: relative;
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 2px solid #e1e1e1;
+    cursor: pointer;
+    background-color: rgba(80, 38, 101, 0.227);
+}
+.task input[type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.task input[type="checkbox"]:checked::before {
+    content: "\f00c";
+    color: #f0f0f0;
+    font-size: 0.8em;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+.task span {
+    font: 0.9em;
+    font-weight: 400;
+    word-break: break-all;
+}
+.task button {
+    color: #f0f0f0;
+    width: 100%;
+    padding: 1em;
+    border-radius: 0.5em;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+.delete {
+    margin-left: auto;
+    background-color: #ff5c5c;
+}
+.completed {
+    border-color: rgb(80, 38, 101);
+}
+#error {
+    text-align: center;
+    background-color: #FFF6F6;
+    color: #ff5c5c;
+    margin-top: 15px;
+    padding: 10px;
+    display: none;
+}
+
