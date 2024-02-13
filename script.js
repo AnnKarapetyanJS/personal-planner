@@ -4,6 +4,9 @@ const date = document.querySelector('.date');
 const daysContainer = document.querySelector('.days');
 const prev = document.querySelector('.prev');
 const next = document.querySelector('.next');
+const todayButton = document.querySelector('.today-btn');
+const gotoButton = document.querySelector('.goto-btn');
+const dateInput = document.querySelector('.date-input');
 
 let today = new Date();
 let activeDay;
@@ -25,8 +28,6 @@ const months = [
     'December',
 ];
 
-// Function to add days
-
 function initCalendar() {
     const firstDay = new Date(year, month, 0);
     const lastDay = new Date(year, month + 1, 0);
@@ -36,34 +37,19 @@ function initCalendar() {
     const day = firstDay.getDay();
     const nextDays = 7 - lastDay.getDay();
 
-    // update date on top of the calendar
     date.innerHTML = months[month] + ' ' + year;
-
-    // adding days to the DOM
     let days = '';
 
-    // previous month days
     for (let x = day; x > 0; --x) {
         days += `<div class="day prev-date">${prevDays - x + 1}</div>`;
     }
-
-    // current month days
     for (let i = 1; i <= lastDate; ++i) {
-        // if day is today, add class today
-        if (
-            i === today.getDate() &&
-            year === today.getFullYear() &&
-            month === today.getMonth()
-        ) {
+        if ((i === today.getDate()) && (year === today.getFullYear()) && (month === today.getMonth())) {
             days += `<div class="day today">${i}</div>`;
-        }
-        // add remaining as it is
-        else {
+        } else {
             days += `<div class="day">${i}</div>`;
         }
     }
-
-    // next month days
     for (let j = 1; j <= nextDays; ++j) {
         days += `<div class="day next-date">${j}</div>`;
     }
@@ -71,8 +57,6 @@ function initCalendar() {
 }
 initCalendar();
 
-
-// previous month
 function prevMonth() {
     --month;
     if (month < 0) {
@@ -81,8 +65,6 @@ function prevMonth() {
     }
     initCalendar();
 }
-
-// next month
 function nextMonth() {
     ++month; 
     if (month > 11) {
@@ -92,10 +74,41 @@ function nextMonth() {
     initCalendar();
 }
 
-// adding eventListeners on prev and next
-
 prev.addEventListener('click', prevMonth);
 next.addEventListener('click', nextMonth);
+
+todayButton.addEventListener('click', () => {
+    today = new Date();
+    month = today.getMonth();
+    year = today.getFullYear();
+    initCalendar();
+});
+
+dateInput.addEventListener('keyup', (e) => {
+    dateInput.value = dateInput.value.replace(/[^0-9/]/g, "");
+    if (dateInput.value.length === 2) {
+        dateInput.value += "/";
+    }
+    if (dateInput.value.length > 7) {
+        dateInput.value = dateInput.value.slice(0, 7);
+    }
+});
+
+function gotoDate() {
+    const dateArr = dateInput.value.split('/');
+    if(dateArr.length === 2) {
+        if(dateArr[0] > 0 && dateArr[0] < 13 && dateArr[1].length === 4) {
+            month = dateArr[0] - 1;
+            year = dateArr[1];
+            initCalendar();
+            return;
+        }
+    }
+    alert('invalid date!');
+}
+
+gotoButton.addEventListener('click', gotoDate);
+
 
 
 // Notes
@@ -152,12 +165,6 @@ const addButton = document.querySelector('#add-btn');
 const newTaskInput = document.querySelector('#text');
 const taskContainer = document.querySelector('#tasks');
 const error = document.getElementById('error');
-const countValue = document.querySelector('#count-value');
-let taskCount = 0;
-
-function displayCount(taskCount) {
-    countValue.innerText = taskCount;
-}
 
 function addTask() {
     const taskName = newTaskInput.value;
@@ -172,7 +179,6 @@ function addTask() {
     const task = `<div class="task">
         <input type="checkbox" class="task-check">
         <span class="taskname">${taskName}</span>
-        </button>
         <button class="delete">
         <i class="fa-solid fa-trash-can"></i>
         </button>
@@ -184,69 +190,60 @@ function addTask() {
     deleteButtons.forEach((button) => {
         button.onclick = () => {
             button.parentNode.remove();
-            taskCount--;
-            displayCount(taskCount);
         };
     });
-
-    const editButtons = document.querySelectorAll('.edit');
-    editButtons.forEach((editBtn) => {
-        editBtn.onclick = (e) => {
-            let targetElement = e.target;
-            if (!(e.target.className === 'edit')) {
-                targetElement = e.target.parentElement;
-            }
-            newTaskInput.value = targetElement.previousElementSibling?.innerText;
-            targetElement.parentNode.remove();
-            taskCount--;
-            displayCount(taskCount);
-        };
-    });
-
-    const tasksCheck = document.querySelectorAll('.task-check');
-        tasksCheck.forEach((checkBox) => {
-        checkBox.addEventListener('change', () => {
-            checkBox.nextElementSibling.classList.toggle('completed');
-            if (checkBox.checked) {
-                taskCount--;
-            } else {
-                taskCount++;
-            }
-            displayCount(taskCount);
-        });
-    });
-
-
-    taskCount++;
-    displayCount(taskCount);
     newTaskInput.value = '';
 }
 
 addButton.addEventListener('click', addTask);
 
 window.onload = () => {
-    taskCount = 0;
-    displayCount(taskCount);
     newTaskInput.value = "";
 }
+
+
+
+// Random quote generation
+const quote = document.getElementById('motivationalQuote');
+const author = document.getElementById('author');
+const apiUrl = 'http://api.quotable.io/random';
+
+async function getQuote(url) {
+    const response = await fetch(url);
+    let data = await response.json();
+
+    quote.innerHTML = data.content;
+    author.innerHTML = data.author;
+}
+getQuote(apiUrl);
 
 
 
 // eventListener for activating buttons
 document.addEventListener('DOMContentLoaded', function() {
     const calendarButton = document.getElementById('calendar');
+    const mainCalendar = document.getElementById('mainCalendar');
     const notesButton = document.getElementById('notes');
-    // const mainCalendar = document.getElementById('mainCalendar');
-    // const mainNotes = document.getElementById('mainNotes');
+    const mainNotes = document.getElementById('mainNotes');
+    const myDayButton = document.getElementById('myDay');
+    const mainMyDay = document.getElementById('mainMyDay');
 
     calendarButton.addEventListener('click', function() {
         mainCalendar.style.display = 'block';
         mainNotes.style.display = 'none';
+        mainMyDay.style.display = 'none';
     });
 
     notesButton.addEventListener('click', function() {
         mainNotes.style.display = 'block';
         mainCalendar.style.display = 'none';
+        mainMyDay.style.display = 'none';
     });
+
+    myDayButton.addEventListener('click', function() {
+        mainMyDay.style.display = 'block';
+        mainCalendar.style.display = 'none';
+        mainNotes.style.display = 'none';
+    })
 });
 

@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    font-family: "Playfair Display", serif;
 }
 header {
     background-color: rgb(80, 38, 101);
@@ -31,9 +31,64 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
+    padding-bottom: 80px;
     box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
 }
+
+/* Quote of the day */
+.quote {
+    width: 90%;
+    height: 50%;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 50px;
+}
+#quoteHeader {
+    color: rgb(80, 38, 101);
+    position: relative;
+    font-size: 32px;
+    margin-left: 50px;
+}
+#quoteHeader::after {
+    content: ' ';
+    width: 100px;
+    height: 3px;
+    border-radius: 3px;
+    background: rgb(80, 38, 101);
+    position: absolute;
+    bottom: -10px;
+    left: 40%;
+    transform: translateX(-50%);
+}
+#motivationalQuote {
+    font-size: 20px;
+    min-height: 110px;
+    position: relative;
+    padding-top: 30px;
+}
+#motivationalQuote::before,
+#motivationalQuote::after {
+    content: '"';
+}
+#author {
+    display: block;
+    margin-top: 80px;
+    float: right;
+    position: absolute;
+    margin-top: 0px;
+    margin-left: 150px;
+}
+#author::before {
+    content: '';
+    width: 20px;
+    height: 2px;
+    background-color: rgb(80, 38, 101);
+    position: absolute;
+    top: 50%;
+    left: -30px;
+}
+
 .asideButton {
     width: 70%;
     padding: 12px;
@@ -53,8 +108,7 @@ main {
 /* Calendar */
 #mainCalendar {
     display: none;
-    background-color: rgb(245, 253, 255);
-    height: 100vh;
+    height: 93vh;
     width: 75%;
     padding: 20px;
     box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
@@ -75,6 +129,51 @@ main {
     background-color: #f7f7f7; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+}
+.calendar .goto-today {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    color: rgb(80, 38, 101);
+}
+.calendar .goto-today .goto {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid rgb(80, 38, 101);
+}
+.calendar .goto-today .goto input {
+    width: 100%;
+    height: 30px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0 20px;
+    color: rgb(80, 38, 101);
+    border-radius: 5px;
+}
+.calendar .goto-today button {
+    padding: 5px 10px;
+    border: 1px solid rgb(80, 38, 101);
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    color: rgb(80, 38, 101);
+}
+.calendar .goto-today button:hover {
+    color: white;
+    background-color: rgb(80, 38, 101);
+}
+.calendar .goto-today .goto button {
+    border: none;
+    border-left: 1px solid rgb(80, 38, 101);
+    border-radius: 0;
 }
 .calendar::before,
 .calendar::after {
@@ -231,7 +330,7 @@ main {
     width: 100%;
     max-width: 500px;
     min-height: 150px;
-    background: rgb(243, 235, 250);
+    background: #f7f7f7; 
     color: #555;
     padding: 20px;
     margin: 20px 0;
@@ -251,6 +350,7 @@ main {
 }
 
 
+
 /* My day*/
 #mainMyDay {
     width: 100%;
@@ -259,7 +359,7 @@ main {
 }
 .container {
     padding: 20px;
-    background-color: none;
+    background-color: #f7f7f7; 
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     border-radius: 12px;
 }
@@ -274,6 +374,9 @@ main {
     border: 1px solid rgb(80, 38, 101);
     border-radius: 3px;
     outline: none;
+    flex: 1;
+    background: transparent;
+    font-weight: 14px;
 }
 .wrapper input:focus {
     border-color: #5e4d4d;
@@ -310,6 +413,11 @@ main {
     align-items: center;
     cursor: pointer;
 }
+#pending-tasks {
+    color: rgb(80, 38, 101);
+    font-size: 28px;
+    font-weight: 500;
+}
 .task:not(:first-child) {
     margin-top: 1em;
 }
@@ -321,7 +429,7 @@ main {
     border-radius: 50%;
     border: 2px solid #e1e1e1;
     cursor: pointer;
-    background-color: rgba(80, 38, 101, 0.227);
+    background-color: rgb(245, 253, 255);;
 }
 .task input[type="checkbox"]::before {
     content: "";
@@ -330,10 +438,9 @@ main {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
 .task input[type="checkbox"]:checked::before {
     content: "\f00c";
-    color: #f0f0f0;
+    color: rgb(80, 38, 101);
     font-size: 0.8em;
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
