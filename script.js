@@ -161,6 +161,14 @@ document.addEventListener('keydown', event => {
 
 
 // My day
+function updateTime() {
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+    const currentDateTime = now.toLocaleString('en-US', options);
+    document.querySelector('.datetime-display').textContent = currentDateTime;
+}
+updateTime();
+
 const addButton = document.querySelector('#add-btn');
 const newTaskInput = document.querySelector('#text');
 const taskContainer = document.querySelector('#tasks');
@@ -247,3 +255,14 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 });
 
+
+// Hidden buttons
+document.addEventListener('DOMContentLoaded', function() {
+    const wrapperButton = document.getElementById('wrapper-button');
+    const wrappedButtons = document.getElementById('wrapped-buttons');
+
+    wrapperButton.addEventListener('click', function() {
+        wrappedButtons.classList.toggle('hidden-buttons');
+        wrappedButtons.classList.toggle('visible-buttons');
+    });
+});

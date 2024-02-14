@@ -27,7 +27,15 @@
             <!-- Buttons -->
             <button class="asideButton" id="myDay">My day</button> <br>
             <button class="asideButton" id="calendar">Calendar</button> <br>
-            <button class="asideButton" id="notes">Notes</button>
+            <button class="asideButton" id="notes">Notes</button> <br>
+            <button class="asideButton" id="wrapper-button"><img src="https://icon-library.com/images/white-plus-icon/white-plus-icon-3.jpg" alt="Image" id="buttonPlusIcon">My Lists</button>
+            <div id="wrapped-buttons" class="hidden-buttons">
+                <button class="asideButton">Personal</button>
+                <button class="asideButton">Work</button>
+                <button class="asideButton">Movies</button>
+                <button class="asideButton">Books</button>
+            </div>
+
         </div>
 
         <!-- Calendar -->
@@ -44,7 +52,7 @@
                             <div>mon</div>
                             <div>tue</div>
                             <div>wed</div>
-                            <div>thur</div>
+                            <div>thu</div>
                             <div>fri</div>
                             <div>sat</div>
                             <div>sun</div>
@@ -73,6 +81,9 @@
 
         <!-- My day -->
         <div id="mainMyDay">
+            <div class="datetime">
+                <b><span class="datetime-display"></span></b>
+            </div>
             <div class="container">
                 <div id="tasks">
                     <p id="pending-tasks">Your To-Do List</p>

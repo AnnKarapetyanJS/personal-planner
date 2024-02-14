@@ -92,7 +92,7 @@ main {
 .asideButton {
     width: 70%;
     padding: 12px;
-    margin-bottom: 10px;
+    margin: 5px 0;
     background-color: rgb(80, 38, 101);
     color: white;
     border: none;
@@ -103,12 +103,31 @@ main {
 .asideButton:hover {
     background-color: rgb(120, 78, 161);
 }
+#buttonPlusIcon {
+    width: 20px;
+    position: absolute;
+    top: 710px;
+    left: 280px;
+}
+.hidden-buttons {
+    display: none;
+}
+.visible-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 50%;
+}
+
+
 
 
 /* Calendar */
 #mainCalendar {
     display: none;
-    height: 93vh;
+    height: 100vh;
     width: 75%;
     padding: 20px;
     box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
@@ -352,6 +371,13 @@ main {
 
 
 /* My day*/
+.datetime {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    font-size: 24px;
+    color: rgb(80, 38, 101);;
+}
 #mainMyDay {
     width: 100%;
     max-width: 600px;
@@ -453,14 +479,14 @@ main {
 .task button {
     color: #f0f0f0;
     width: 100%;
-    padding: 1em;
-    border-radius: 0.5em;
+    padding: 11px;
+    border-radius: 7px;
     border: none;
     cursor: pointer;
     outline: none;
 }
 .delete {
-    margin-left: auto;
+    margin-left: 80px;
     background-color: #ff5c5c;
 }
 .completed {
@@ -474,4 +500,3 @@ main {
     padding: 10px;
     display: none;
 }
-
