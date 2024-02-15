@@ -99,6 +99,7 @@ main {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    position: relative;
 }
 .asideButton:hover {
     background-color: rgb(120, 78, 161);
@@ -106,8 +107,7 @@ main {
 #buttonPlusIcon {
     width: 20px;
     position: absolute;
-    top: 710px;
-    left: 280px;
+    right: 15px;
 }
 .hidden-buttons {
     display: none;
